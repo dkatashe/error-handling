@@ -32,12 +32,14 @@ public class Verifier
     return content;
   }
 
-  private void writeCsv(String path, ArrayList<String> content) throws IOException {
+  private void writeCsv(String path, ArrayList<String> content) throws IOException
+  {
     final String lineSep=System.getProperty("line.separator");
 
-    try(BufferedWriter bw=new BufferedWriter(new FileWriter(path)))
+    try (BufferedWriter bw=new BufferedWriter(new FileWriter(path)))
     {
-      for (String line : content) {
+      for (String line : content)
+      {
         bw.write(line + lineSep);
       }
     }
@@ -55,18 +57,20 @@ public class Verifier
       throw new IllegalArgumentException("File should have an extension \".csv\"");
 
     ArrayList<String> csvContent=readCsv(path);
-    int entries = 0;
+    int entries=0;
 
-    for (int i = 0; i < csvContent.size(); i++) {
-      String line = csvContent.get(i);
+    for (int i=0; i < csvContent.size(); i++)
+    {
+      String line=csvContent.get(i);
       if (!line.startsWith("id"))
       {
         int id;
         try
         {
-          String[] lineArr = line.split(",");
+          String[] lineArr=line.split(",");
           id=Integer.parseInt(lineArr[0]);
-          try {
+          try
+          {
             String verificationCode=wsCaller.getVerificationCode(id);
             line+="," + verificationCode;
           }

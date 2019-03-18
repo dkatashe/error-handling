@@ -25,10 +25,14 @@ public class Application
       try
       {
         verifier.verify(path);
-      } catch (IllegalArgumentException | FileNotFoundException e) {
+      }
+      catch (IllegalArgumentException | FileNotFoundException e)
+      {
         logger.err(e, e.getMessage());
         continue;
-      } catch (IOException e) {
+      }
+      catch (IOException e)
+      {
         logger.err(e, "Can't perform read/write operations with a file");
         break;
       }
