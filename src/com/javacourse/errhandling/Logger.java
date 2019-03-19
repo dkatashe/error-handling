@@ -17,21 +17,12 @@ public class Logger
 
     File logFile=new File("error_" + date + ".log");
 
-    if (!logFile.exists())
+    try
     {
-      try
+      if (!logFile.exists())
       {
         logFile.createNewFile();
       }
-      catch (IOException ex)
-      {
-        System.err.println("Internal error: Can't create log file");
-        return;
-      }
-    }
-
-    try
-    {
       PrintStream ps=new PrintStream(new FileOutputStream(logFile, true));
       ps.print(timestamp + " Exception:\n");
       e.printStackTrace(ps);
@@ -40,6 +31,10 @@ public class Logger
     catch (FileNotFoundException ex)
     {
       System.err.println("Internal error: Log file was not found");
+    }
+    catch (IOException ex)
+    {
+      System.err.println("Internal error: Can't create log file");
     }
   }
 }
